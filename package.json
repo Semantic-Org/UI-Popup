@@ -17,5 +17,5 @@
     "jquery": "x.x.x"
   },
   "devDependencies": {},
-  "main": "popup.js"
+  "main": "index.js"
 }
