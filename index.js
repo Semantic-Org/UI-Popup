@@ -238,7 +238,7 @@ module.exports = function(parameters) {
         },
 
         show: function(callback) {
-          callback = callback || function(){};
+          callback = $.isFunction(callback) ? callback : function(){};
           module.debug('Showing pop-up', settings.transition);
           if(!settings.preserve && !settings.popup) {
             module.refresh();
@@ -254,7 +254,7 @@ module.exports = function(parameters) {
 
 
         hide: function(callback) {
-          callback = callback || function(){};
+          callback = $.isFunction(callback) ? callback : function(){};
           $module
             .removeClass(className.visible)
           ;
@@ -315,6 +315,7 @@ module.exports = function(parameters) {
         },
         restore: {
           conditions: function() {
+            element.blur();
             if(module.cache && module.cache.title) {
               $module.attr('title', module.cache.title);
               module.verbose('Restoring original attributes', module.cache.title);
@@ -324,27 +325,19 @@ module.exports = function(parameters) {
         },
         animate: {
           show: function(callback) {
-            callback = callback || function(){};
+            callback = $.isFunction(callback) ? callback : function(){};
             if(settings.transition && $.fn.transition !== undefined && $module.transition('is supported')) {
               $popup
                 .transition({
                   animation : settings.transition + ' in',
                   queue     : false,
                   duration  : settings.duration,
-<<<<<<< HEAD
                   onStart   : function() {
-=======
-                  start: function() {
->>>>>>> 238b39192a7c5ba21da361555a86c8edd26e8d22
                     $module
                       .addClass(className.visible)
                     ;
                   },
-<<<<<<< HEAD
                   onComplete  : function() {
-=======
-                  complete  : function() {
->>>>>>> 238b39192a7c5ba21da361555a86c8edd26e8d22
                     module.bind.close();
                     $.proxy(callback, element)();
                   }
@@ -366,22 +359,15 @@ module.exports = function(parameters) {
             $.proxy(settings.onShow, element)();
           },
           hide: function(callback) {
-            callback = callback || function(){};
+            callback = $.isFunction(callback) ? callback : function(){};
             module.debug('Hiding pop-up');
             if(settings.transition && $.fn.transition !== undefined && $module.transition('is supported')) {
               $popup
                 .transition({
-<<<<<<< HEAD
                   animation  : settings.transition + ' out',
                   queue      : false,
                   duration   : settings.duration,
                   onComplete : function() {
-=======
-                  animation : settings.transition + ' out',
-                  queue     : false,
-                  duration  : settings.duration,
-                  complete  : function() {
->>>>>>> 238b39192a7c5ba21da361555a86c8edd26e8d22
                     module.reset();
                     callback();
                   }
@@ -651,11 +637,21 @@ module.exports = function(parameters) {
           popup: function() {
             module.verbose('Allowing hover events on popup to prevent closing');
             $popup
-              .on('mouseenter', module.event.start)
-              .on('mouseleave', module.event.end)
+              .on('mouseenter' + eventNamespace, module.event.start)
+              .on('mouseleave' + eventNamespace, module.event.end)
             ;
           },
           close:function() {
+            if(settings.hideOnScroll) {
+              $document
+                .on('touchmove' + eventNamespace, module.hideGracefully)
+                .on('scroll' + eventNamespace, module.hideGracefully)
+              ;
+              $context
+                .on('touchmove' + eventNamespace, module.hideGracefully)
+                .on('scroll' + eventNamespace, module.hideGracefully)
+              ;
+            }
             if(settings.on == 'click' && settings.closable) {
               module.verbose('Binding popup close event to document');
               $document
@@ -670,6 +666,14 @@ module.exports = function(parameters) {
 
         unbind: {
           close: function() {
+            if(settings.hideOnScroll) {
+              $document
+                .off('scroll' + eventNamespace, module.hide)
+              ;
+              $context
+                .off('scroll' + eventNamespace, module.hide)
+              ;
+            }
             if(settings.on == 'click' && settings.closable) {
               module.verbose('Removing close event from document');
               $document
@@ -909,6 +913,7 @@ module.exports.settings = {
 
   on             : 'hover',
   closable       : true,
+  hideOnScroll   : true,
 
   context        : 'body',
   position       : 'top left',
