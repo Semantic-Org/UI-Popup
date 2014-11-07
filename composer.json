@@ -14,5 +14,9 @@
     "jquery": "x.x.x"
   },
   "main": "popup.js",
+<<<<<<< HEAD
   "version": "1.0.0-beta"
+=======
+  "version": "1.0.0"
+>>>>>>> 238b39192a7c5ba21da361555a86c8edd26e8d22
 }

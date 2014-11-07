@@ -1,6 +1,10 @@
 {
   "name": "semantic-ui-popup",
+<<<<<<< HEAD
   "version": "1.0.0-beta",
+=======
+  "version": "1.0.0",
+>>>>>>> 238b39192a7c5ba21da361555a86c8edd26e8d22
   "title": "Semantic UI - Popup",
   "description": "Single component release of popup",
   "homepage": "http://www.semantic-ui.com",
@@ -13,9 +17,16 @@
   "bugs": {
     "url": "https://github.com/Semantic-Org/Semantic-UI/issues"
   },
+<<<<<<< HEAD
   "devDependencies": {},
   "dependencies": {
     "jquery": "x.x.x"
   },
+=======
+  "dependencies": {
+    "jquery": "x.x.x"
+  },
+  "devDependencies": {},
+>>>>>>> 238b39192a7c5ba21da361555a86c8edd26e8d22
   "main": "index.js"
 }

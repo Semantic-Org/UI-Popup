@@ -331,12 +331,20 @@ module.exports = function(parameters) {
                   animation : settings.transition + ' in',
                   queue     : false,
                   duration  : settings.duration,
+<<<<<<< HEAD
                   onStart   : function() {
+=======
+                  start: function() {
+>>>>>>> 238b39192a7c5ba21da361555a86c8edd26e8d22
                     $module
                       .addClass(className.visible)
                     ;
                   },
+<<<<<<< HEAD
                   onComplete  : function() {
+=======
+                  complete  : function() {
+>>>>>>> 238b39192a7c5ba21da361555a86c8edd26e8d22
                     module.bind.close();
                     $.proxy(callback, element)();
                   }
@@ -363,10 +371,17 @@ module.exports = function(parameters) {
             if(settings.transition && $.fn.transition !== undefined && $module.transition('is supported')) {
               $popup
                 .transition({
+<<<<<<< HEAD
                   animation  : settings.transition + ' out',
                   queue      : false,
                   duration   : settings.duration,
                   onComplete : function() {
+=======
+                  animation : settings.transition + ' out',
+                  queue     : false,
+                  duration  : settings.duration,
+                  complete  : function() {
+>>>>>>> 238b39192a7c5ba21da361555a86c8edd26e8d22
                     module.reset();
                     callback();
                   }
