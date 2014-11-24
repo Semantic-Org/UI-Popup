@@ -4,6 +4,14 @@
 - **Popup** - A popup element can now be specified on initialization.
 - **Popup** - Positioned popups will now extend in the opposite direction to fit better with floated content
 
+### Version 0.18.0 - June 6, 2014
+
+- **Popup** - Fixes javascript animation of popup missing easing dependency
+
+### Version 0.17.0 - May 9, 2014
+
+- **Popup** - Popup now has an ``onRemove`` callback after removing element from DOM
+
 ### Version 0.12.5 - Feb 04, 2014
 
 - **Popup** - Fixes issue where popups using ``title`` attribute to store data were losing title content instead of correctly restoring it
