@@ -107,12 +107,14 @@ module.exports = function(parameters) {
         },
 
         refresh: function() {
-          $popup = (settings.popup)
-            ? $(settings.popup)
-            : (settings.inline)
-              ? $target.next(settings.selector.popup)
-              : false
-          ;
+          if(settings.popup) {
+            $popup = $(settings.popup);
+          }
+          else {
+            if(settings.inline) {
+              $popup = $target.next(settings.selector.popup);
+            }
+          }
           if(settings.popup) {
             $popup.addClass(className.loading);
             $offsetParent = $popup.offsetParent();
@@ -662,10 +664,12 @@ module.exports = function(parameters) {
         bind: {
           popup: function() {
             module.verbose('Allowing hover events on popup to prevent closing');
-            $popup
-              .on('mouseenter' + eventNamespace, module.event.start)
-              .on('mouseleave' + eventNamespace, module.event.end)
-            ;
+            if($popup && $popup.size() > 0) {
+              $popup
+                .on('mouseenter' + eventNamespace, module.event.start)
+                .on('mouseleave' + eventNamespace, module.event.end)
+              ;
+            }
           },
           close:function() {
             if(settings.hideOnScroll === true || settings.hideOnScroll == 'auto' && settings.on != 'click') {

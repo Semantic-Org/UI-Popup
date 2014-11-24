@@ -1,4 +1,4 @@
-### Version 1.0.0 - XX XX, 2014
+### Version 1.0.0 - November 24, 2014
 
 - **Popup** - Popup can now allow itself not to be closed when hovered over
 - **Popup** - A popup element can now be specified on initialization.
