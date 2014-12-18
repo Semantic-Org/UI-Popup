@@ -1,3 +1,8 @@
+### Version 1.1.0 - December 02, 2014
+
+- **Popup** - Popup now has a ``settings.prefer`` that defaults to ``adjacent``. This setting sets prefered next placement when a popup cannot fit on screen in the chosen placement. ``prefer`` can also be set to ``opposite`` to prefer the same position on the opposite side
+- **Popup** - Popup can now use a setting ``lastResort``. When set to a position it will be used as a last resort even if popup does not entirely fit on the page. Setting this to ``false`` will produce an error when a popup cannot fit on screen.
+
 ### Version 1.0.0 - November 24, 2014
 
 - **Popup** - Popup can now allow itself not to be closed when hovered over
