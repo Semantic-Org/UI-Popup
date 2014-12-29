@@ -313,7 +313,9 @@ module.exports = function(parameters) {
         removePopup: function() {
           module.debug('Removing popup');
           $.proxy(settings.onRemove, $popup)(element);
-          $popup.remove();
+          if($popup.size() > 0) {
+            $popup.remove();
+          }
         },
 
         save: {
@@ -654,6 +656,8 @@ module.exports = function(parameters) {
             if(positioning === undefined) {
               module.error(error.invalidPosition, position);
             }
+
+            module.debug('Calculated popup positioning values', positioning);
 
             // tentatively place on stage
             $popup
