@@ -1,3 +1,21 @@
+### Version 1.7.0 - January 14, 2015
+
+- **Popup** - Popup now uses its own custom method for determining `offsetParent` meaning 3D contexts (like inside an animation) no longer should break positioning
+- **Popup** - Popup now uses `preserve: false` by default, this is slightly less performant but will reduce page clutter caused by leaving generated elements in the DOM
+- **Popup** - `wide` and `very wide` popup will now appear when screen size is below their `max-width`
+- **Popup** - Popup no longer blurs element on popup hide
+
+### Version 1.6.0 - January 05, 2015
+
+- **Popup** - Fix issue with `ui popup` receiving error ``$offsetParent is undefined`` when using a pre-defined popup
+- **Popup** - Fix issue with ``ui popup` not appearing with ``ui flowing popup`` due to newly added ``min-width: max-content``
+
+### Version 1.5.0 - December 30, 2014
+
+- **Popup** - Popup now uses the new property ``min-width: max-content`` to allow for better display with ``inline`` in some circumstances where it escapes parent element.
+- **Popup** - Popup destroy will now also destroy any unfired timers (show/hide delay)
+- **Popup** - Popup now moves to the same offset context to avoid positioning errors when using a named pre-existing popup.
+
 ### Version 1.1.0 - December 02, 2014
 
 - **Popup** - Popup now has a ``settings.prefer`` that defaults to ``adjacent``. This setting sets prefered next placement when a popup cannot fit on screen in the chosen placement. ``prefer`` can also be set to ``opposite`` to prefer the same position on the opposite side
