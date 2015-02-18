@@ -1,0 +1,27 @@
+{
+  "name": "semantic/popup",
+  "description": "Single component release of popup",
+  "homepage": "http://www.semantic-ui.com",
+  "authors": [{
+    "name": "Jack Lukic",
+    "email": "jacklukic@gmail.com",
+    "web": "http://www.jacklukic.com",
+    "role": "Creator"
+  }],
+  "keywords": [
+    "semantic",
+    "ui",
+    "css",
+    "framework"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "jquery": "x.x.x"
+  },
+  "main": "popup.js",
+<<<<<<< HEAD
+  "version": "1.0.0-beta"
+=======
+  "version": "1.7.2"
+>>>>>>> 0603ef7cf6d73ef5006258954ceb83474d1ffedb
+}
