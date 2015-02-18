@@ -1,0 +1,17 @@
+{
+  "name": "semantic-ui-popup",
+  "version": "1.9.0",
+  "title": "Semantic UI - Popup",
+  "description": "Single component release of popup",
+  "homepage": "http://www.semantic-ui.com",
+  "author": "Jack Lukic <jack@semantic-ui.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Semantic-Org/UI-Popup.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Semantic-Org/Semantic-UI/issues"
+  },
+  "devDependencies": {}
+}
