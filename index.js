@@ -105,18 +105,30 @@ module.exports = function(parameters) {
 
         refresh: function() {
           if(settings.popup) {
+<<<<<<< HEAD
             $popup = $(settings.popup).eq(0);
           }
           else {
             if(settings.inline) {
               $popup = $target.next(selector.popup).eq(0);
+=======
+            $popup = $(settings.popup);
+          }
+          else {
+            if(settings.inline) {
+              $popup = $target.next(selector.popup);
+>>>>>>> 0603ef7cf6d73ef5006258954ceb83474d1ffedb
             }
           }
           if(settings.popup) {
             $popup.addClass(className.loading);
             $offsetParent = module.get.offsetParent();
             $popup.removeClass(className.loading);
+<<<<<<< HEAD
             if(settings.movePopup && module.has.popup() && module.get.offsetParent($popup)[0] !== $offsetParent[0]) {
+=======
+            if(module.has.popup() && module.get.offsetParent($popup)[0] !== $offsetParent[0]) {
+>>>>>>> 0603ef7cf6d73ef5006258954ceb83474d1ffedb
               module.debug('Moving popup to the same offset parent as activating element');
               $popup
                 .detach()
@@ -299,7 +311,11 @@ module.exports = function(parameters) {
         hideAll: function() {
           $(selector.popup)
             .filter(':visible')
+<<<<<<< HEAD
               .transition(settings.transition)
+=======
+              .transition('hide')
+>>>>>>> 0603ef7cf6d73ef5006258954ceb83474d1ffedb
           ;
         },
 
@@ -1089,7 +1105,10 @@ module.exports.settings = {
   },
 
   setFluidWidth  : true,
+<<<<<<< HEAD
   movePopup      : true,
+=======
+>>>>>>> 0603ef7cf6d73ef5006258954ceb83474d1ffedb
 
   target         : false,
   popup          : false,

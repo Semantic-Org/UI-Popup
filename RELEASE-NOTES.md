@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ### UI Changes
 
 - **Transition** - Transitions with direction now use word order dependency to prevent conflict with component directions, for example `bottom left popup slide down in transition
@@ -11,6 +12,8 @@
 - **Popup** - Popup will now only use a max of one element when `settings.popup` mistakingly passes multiple DOM elements
 - **Popup** - Popups will now by default appear over all UI content, even dimmers.
 
+=======
+>>>>>>> 0603ef7cf6d73ef5006258954ceb83474d1ffedb
 ### Version 1.7.0 - January 14, 2015
 
 - **Popup** - Popup now uses its own custom method for determining `offsetParent` meaning 3D contexts (like inside an animation) no longer should break positioning
