@@ -1,5 +1,5 @@
 /*!
- * # Semantic UI 1.10.3 - Popup
+ * # Semantic UI 1.11.0 - Popup
  * http://github.com/semantic-org/semantic-ui/
  *
  *
@@ -64,6 +64,9 @@ module.exports = function(parameters) {
 
         element            = this,
         instance           = $module.data(moduleNamespace),
+
+        elementNamespace,
+        id,
         module
       ;
 
@@ -71,24 +74,9 @@ module.exports = function(parameters) {
 
         // binds events
         initialize: function() {
-          module.debug('Initializing module', $module);
-          if(settings.on == 'click') {
-            $module
-              .on('click' + eventNamespace, module.toggle)
-            ;
-          }
-          else if( module.get.startEvent() ) {
-            $module
-              .on(module.get.startEvent() + eventNamespace, module.event.start)
-              .on(module.get.endEvent() + eventNamespace, module.event.end)
-            ;
-          }
-          if(settings.target) {
-            module.debug('Target set to element', $target);
-          }
-          $window
-            .on('resize' + eventNamespace, module.event.resize)
-          ;
+          module.debug('Initializing', $module);
+          module.createID();
+          module.bind.events();
           if( !module.exists() && settings.preserve) {
             module.create();
           }
@@ -96,7 +84,7 @@ module.exports = function(parameters) {
         },
 
         instantiate: function() {
-          module.verbose('Storing instance of module', module);
+          module.verbose('Storing instance', module);
           instance = module;
           $module
             .data(moduleNamespace, instance)
@@ -145,11 +133,15 @@ module.exports = function(parameters) {
 
         destroy: function() {
           module.debug('Destroying previous module');
+          // remove element only if was created dynamically
           if($popup && !settings.preserve) {
             module.removePopup();
           }
+          // clear all timeouts
           clearTimeout(module.hideTimer);
           clearTimeout(module.showTimer);
+          // remove events
+          $window.off(elementNamespace);
           $module
             .off(eventNamespace)
             .removeData(moduleNamespace)
@@ -209,6 +201,7 @@ module.exports = function(parameters) {
             $popup = $('<div/>')
               .addClass(className.popup)
               .addClass(variation)
+              .data(metadata.activator, $module)
               .html(html)
             ;
             if(variation) {
@@ -237,13 +230,14 @@ module.exports = function(parameters) {
           else if($target.next(selector.popup).length !== 0) {
             module.verbose('Pre-existing popup found');
             settings.inline = true;
-            settings.popup  = $target.next(selector.popup);
+            settings.popup  = $target.next(selector.popup).data(metadata.activator, $module);
             module.refresh();
             if(settings.hoverable) {
               module.bind.popup();
             }
           }
           else if(settings.popup) {
+            settings.popup.data(metadata.activator, $module);
             module.verbose('Used popup specified in settings');
             module.refresh();
             if(settings.hoverable) {
@@ -255,13 +249,18 @@ module.exports = function(parameters) {
           }
         },
 
+        createID: function() {
+          id = (Math.random().toString(16) + '000000000').substr(2,8);
+          elementNamespace = '.' + id;
+          module.verbose('Creating unique id for element', id);
+        },
+
         // determines popup state
         toggle: function() {
           module.debug('Toggling pop-up');
           if( module.is.hidden() ) {
             module.debug('Popup is hidden, showing pop-up');
             module.unbind.close();
-            module.hideAll();
             module.show();
           }
           else {
@@ -281,6 +280,9 @@ module.exports = function(parameters) {
           }
           if( $popup && module.set.position() ) {
             module.save.conditions();
+            if(settings.exclusive) {
+              module.hideAll();
+            }
             module.animate.show(callback);
           }
         },
@@ -298,8 +300,13 @@ module.exports = function(parameters) {
 
         hideAll: function() {
           $(selector.popup)
-            .filter(':visible')
-              .transition(settings.transition)
+            .filter('.' + className.visible)
+            .each(function() {
+              $(this)
+                .data(metadata.activator)
+                .popup('hide')
+              ;
+            })
           ;
         },
 
@@ -425,14 +432,26 @@ module.exports = function(parameters) {
         },
 
         get: {
+          id: function() {
+            return id;
+          },
           startEvent: function() {
             if(settings.on == 'hover') {
-              return 'mouseenter';
+              return (hasTouch)
+                ? 'touchstart mouseenter'
+                : 'mouseenter'
+              ;
             }
             else if(settings.on == 'focus') {
               return 'focus';
             }
             return false;
+          },
+          scrollEvent: function() {
+            return (hasTouch)
+              ? 'touchmove scroll'
+              : 'scroll'
+            ;
           },
           endEvent: function() {
             if(settings.on == 'hover') {
@@ -743,7 +762,7 @@ module.exports = function(parameters) {
               }
               else if(!settings.lastResort) {
                 module.debug('Popup could not find a position in view', $popup);
-                module.error(error.cannotPlace);
+                module.error(error.cannotPlace, element);
                 module.remove.attempts();
                 module.remove.loading();
                 module.reset();
@@ -784,6 +803,24 @@ module.exports = function(parameters) {
         },
 
         bind: {
+          events: function() {
+            module.debug('Binding popup events to module');
+            if(settings.on == 'click') {
+              $module
+                .on('click' + eventNamespace, module.toggle)
+              ;
+            }
+            else if( module.get.startEvent() ) {
+              $module
+                .on(module.get.startEvent() + eventNamespace, module.event.start)
+                .on(module.get.endEvent() + eventNamespace, module.event.end)
+              ;
+            }
+            if(settings.target) {
+              module.debug('Target set to element', $target);
+            }
+            $window.on('resize' + elementNamespace, module.event.resize);
+          },
           popup: function() {
             module.verbose('Allowing hover events on popup to prevent closing');
             if( $popup && module.has.popup() ) {
@@ -796,18 +833,16 @@ module.exports = function(parameters) {
           close:function() {
             if(settings.hideOnScroll === true || settings.hideOnScroll == 'auto' && settings.on != 'click') {
               $document
-                .one('touchmove' + eventNamespace, module.hideGracefully)
-                .one('scroll' + eventNamespace, module.hideGracefully)
+                .one(module.get.scrollEvent() + elementNamespace, module.hideGracefully)
               ;
               $context
-                .one('touchmove' + eventNamespace, module.hideGracefully)
-                .one('scroll' + eventNamespace, module.hideGracefully)
+                .one(module.get.scrollEvent() + elementNamespace, module.hideGracefully)
               ;
             }
             if(settings.on == 'click' && settings.closable) {
               module.verbose('Binding popup close event to document');
               $document
-                .on('click' + eventNamespace, function(event) {
+                .on('click' + elementNamespace, function(event) {
                   module.verbose('Pop-up clickaway intent detected');
                   module.hideGracefully.call(element, event);
                 })
@@ -820,16 +855,16 @@ module.exports = function(parameters) {
           close: function() {
             if(settings.hideOnScroll === true || settings.hideOnScroll == 'auto' && settings.on != 'click') {
               $document
-                .off('scroll' + eventNamespace, module.hide)
+                .off('scroll' + elementNamespace, module.hide)
               ;
               $context
-                .off('scroll' + eventNamespace, module.hide)
+                .off('scroll' + elementNamespace, module.hide)
               ;
             }
             if(settings.on == 'click' && settings.closable) {
               module.verbose('Removing close event from document');
               $document
-                .off('click' + eventNamespace)
+                .off('click' + elementNamespace)
               ;
             }
           }
@@ -1076,6 +1111,7 @@ module.exports.settings = {
   on           : 'hover',
   closable     : true,
   hideOnScroll : 'auto',
+  exclusive    : true,
 
   context      : 'body',
 
@@ -1112,6 +1148,7 @@ module.exports.settings = {
   },
 
   metadata: {
+    activator : 'activator',
     content   : 'content',
     html      : 'html',
     offset    : 'offset',

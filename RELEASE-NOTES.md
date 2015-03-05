@@ -1,3 +1,10 @@
+### Version 1.11.0 - March 3, 2015
+
+- **Popup** - Added `exclusive` parameter to automatically close other popups on open
+- **Popup** - Fix issue with `popup` not re-opening until another element gains focus on a mobile touchscreen
+- **Popup** - Popup will now fire `onHidden` when an element is hidden by opening a different popup
+- **Popup** - Fix popup not namespacing `window` events and unbinding on `destroy` **Thanks @revov**
+
 ### UI Changes
 
 - **Transition** - Transitions with direction now use word order dependency to prevent conflict with component directions, for example `bottom left popup slide down in transition
