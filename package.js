@@ -2,7 +2,7 @@
 Package.describe({
   name    : 'semantic:ui-popup',
   summary : 'Semantic UI - Popup: Single component release',
-  version : '1.11.4',
+  version : '1.11.5',
   git     : 'git://github.com/Semantic-Org/UI-Popup.git',
 });
 
