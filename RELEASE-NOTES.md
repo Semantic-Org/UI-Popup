@@ -1,3 +1,7 @@
+### Version 1.12.0 - April 13, 2015
+
+- **Popup** - Popup no longer produces a console error when it cannot find an adequate position in the browser viewport.
+
 ### Version 1.11.0 - March 3, 2015
 
 - **Popup** - Added `exclusive` parameter to automatically close other popups on open
