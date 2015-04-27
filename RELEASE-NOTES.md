@@ -1,3 +1,7 @@
+### Version 1.12.1 - April 26, 2015
+
+- **Popup** - Removes `min-width: moz-max-content` from popups, which may cause display differences between chrome and FF
+
 ### Version 1.12.0 - April 13, 2015
 
 - **Popup** - Popup no longer produces a console error when it cannot find an adequate position in the browser viewport.
