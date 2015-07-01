@@ -1,3 +1,21 @@
+### Version 2.0.0 - June 30, 2015
+
+- **Popup** - Popups are no longer exclusive by default. Opening a popup will not necessarily close other visible popups. You can change this behavior by using the setting `exclusive: true`. Additionally the default theme now uses `1rem` size for standard popups.
+- **Popup** - Popup has been rewritten to drastically improve performance, especially when testing multiple positions.
+- **Transition** - Fallback javascript animations have been removed from UI components like dropdown and popup to increase performance. This removes need for expensive pseudo selectors like `:visible`, `:animated` and `:hidden` and reduces filesize.
+- **Popup** - Popup now defines a `transform-origin` so animations will be affected by the direction the element is placed
+- **Popup** - `onShow` and `onHide` callback can now cancel popup from showing or hiding by returning false
+- **Popup** - Added more size variations for popup `mini`, `tiny`
+- **Popup** - Popup now correctly adjusts if `data` attributes change
+- **Popup** - Fixes issue with `min-width` in firefox exceeding `max-width` causing element to not wrap correctly
+- **Popup** - Popup will now produce an error message and not mistakenly appear in the top left corner of page, if called with a `popup` or `target` that does not exist.
+- **Popup** - Popup will no longer appear incorrectly if the targeted element is not visible on page
+- **Popup** - Fixed bug which could cause pre-existing inline popup to be removed from DOM after hiding
+- **Popup** - Fixes popup offstage position calculations with pages including horizontal scrollbars
+- **Popup** - Added `addTouchEvents` to specify whether touch events should be added to trigger popup on mobile
+- **Popup** - Popups now default to `exclusive: false` and will not hide other popups when opening
+- **Popup** - Popup no longer produces a console error when a position cannot be found on the page.
+
 ### Version 1.12.1 - April 26, 2015
 
 - **Popup** - Removes `min-width: moz-max-content` from popups, which may cause display differences between chrome and FF
