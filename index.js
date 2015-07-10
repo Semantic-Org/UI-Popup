@@ -1,5 +1,5 @@
 /*!
- * # Semantic UI 2.0.2 - Popup
+ * # Semantic UI 2.0.3 - Popup
  * http://github.com/semantic-org/semantic-ui/
  *
  *
@@ -1220,7 +1220,7 @@ module.exports.settings = {
   inline         : false,
 
   // popup should be removed from page on hide
-  preserve       : true,
+  preserve       : false,
 
   // popup should not close when being hovered on
   hoverable      : false,
