@@ -1,5 +1,5 @@
 /*!
- * # Semantic UI 2.0.5 - Popup
+ * # Semantic UI 2.0.7 - Popup
  * http://github.com/semantic-org/semantic-ui/
  *
  *
@@ -23,7 +23,7 @@ module.exports = function(parameters) {
 
     moduleSelector = $allModules.selector || '',
 
-    hasTouch       = ('ontouchstart' in document.documentElement),
+    hasTouch       = (true),
     time           = new Date().getTime(),
     performance    = [],
 
@@ -157,7 +157,9 @@ module.exports = function(parameters) {
                 : settings.delay
             ;
             clearTimeout(module.hideTimer);
-            module.showTimer = setTimeout(module.show, delay);
+            if(!openedWithTouch) {
+              module.showTimer = setTimeout(module.show, delay);
+            }
           },
           end:  function() {
             var
@@ -170,7 +172,7 @@ module.exports = function(parameters) {
           },
           touchstart: function(event) {
             openedWithTouch = true;
-            module.event.start();
+            module.show();
           },
           resize: function() {
             if( module.is.visible() ) {
@@ -280,7 +282,6 @@ module.exports = function(parameters) {
         show: function(callback) {
           callback = callback || function(){};
           module.debug('Showing pop-up', settings.transition);
-
           if(module.is.hidden() && !( module.is.active() && module.is.dropdown()) ) {
             if( !module.exists() ) {
               module.create();
@@ -399,8 +400,8 @@ module.exports = function(parameters) {
           hide: function(callback) {
             callback = $.isFunction(callback) ? callback : function(){};
             module.debug('Hiding pop-up');
-            if(settings.onShow.call($popup, element) === false) {
-              module.debug('onShow callback returned false, cancelling popup animation');
+            if(settings.onHide.call($popup, element) === false) {
+              module.debug('onHide callback returned false, cancelling popup animation');
               return;
             }
             if(settings.transition && $.fn.transition !== undefined && $module.transition('is supported')) {
@@ -885,7 +886,7 @@ module.exports = function(parameters) {
                 .on('touchstart' + eventNamespace, module.event.touchstart)
               ;
             }
-            else if( module.get.startEvent() ) {
+            if( module.get.startEvent() ) {
               $module
                 .on(module.get.startEvent() + eventNamespace, module.event.start)
                 .on(module.get.endEvent() + eventNamespace, module.event.end)

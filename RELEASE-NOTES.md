@@ -1,3 +1,9 @@
+### Version 2.0.7 - July 22, 2015
+
+- **Popup** - Fixed issue where popup would not open on tablets with both touchscreen and mouse on mouseenter. [#2715](https://github.com/Semantic-Org/Semantic-UI/issues/2715)
+- **Popup** - Fixed terribly typo where popup `onShow` was mistakenly being called instead of `onHide` when hiding popup
+- **Popup** - Popup on `touchstart` now occurs immediately without waiting for `delay.show`
+
 ### Version 2.0.4 - July 17, 2015
 
 - **Popup** - `fluid` popup with `setFluidWidth: true` (default value), will now use `parent` width and not `offsetContext` width [#2526](https://github.com/Semantic-Org/Semantic-UI/issues/2526)
