@@ -1,4 +1,4 @@
-### Version 2.0.7 - July 22, 2015
+### Version 2.0.7 - July 23, 2015
 
 - **Popup** - Fixed issue where popup would not open on tablets with both touchscreen and mouse on mouseenter. [#2715](https://github.com/Semantic-Org/Semantic-UI/issues/2715)
 - **Popup** - Fixed terribly typo where popup `onShow` was mistakenly being called instead of `onHide` when hiding popup
