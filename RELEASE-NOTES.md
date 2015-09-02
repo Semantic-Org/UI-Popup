@@ -1,3 +1,12 @@
+#### Features
+
+- **Popup** - Popup will now look for inline popup as any next adjacent sibling [#2772 **Thanks @malacalypse**](https://github.com/Semantic-Org/Semantic-UI/issues/se**)
+
+#### Bugs
+
+- **Popup** - Fixes issue where variation would not be added to a pre-existing popup even if specified in javascript [#26011](https://github.com/Semantic-Org/Semantic-UI/issues/6011)
+- **Popup** - Fixed `onRemove` firing even when popup is not removed
+
 ### Version 2.0.7 - July 23, 2015
 
 - **Popup** - Fixed issue where popup would not open on tablets with both touchscreen and mouse on mouseenter. [#2715](https://github.com/Semantic-Org/Semantic-UI/issues/2715)
