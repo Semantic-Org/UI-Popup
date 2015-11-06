@@ -1,5 +1,5 @@
 /*!
- * # Semantic UI 2.1.4 - Popup
+ * # Semantic UI 2.1.6 - Popup
  * http://github.com/semantic-org/semantic-ui/
  *
  *
@@ -424,6 +424,12 @@ module.exports = function(parameters) {
           }
         },
 
+        change: {
+          content: function(html) {
+            $popup.html(html);
+          }
+        },
+
         get: {
           html: function() {
             $module.removeData(metadata.html);
@@ -441,13 +447,16 @@ module.exports = function(parameters) {
             $module.removeData(metadata.variation);
             return $module.data(metadata.variation) || settings.variation;
           },
+          popup: function() {
+            return $popup;
+          },
           popupOffset: function() {
             return $popup.offset();
           },
           calculations: function() {
             var
               targetElement  = $target[0],
-              targetPosition = (settings.inline || settings.popup)
+              targetPosition = (settings.inline || (settings.popup && settings.movePopup))
                 ? $target.position()
                 : $target.offset(),
               calculations = {},
@@ -689,7 +698,7 @@ module.exports = function(parameters) {
             popup  = calculations.popup;
             parent = calculations.parent;
 
-            if(target.width === 0 && target.height === 0) {
+            if(target.width === 0 && target.height === 0 && !(target.element instanceof SVGGraphicsElement)) {
               module.debug('Popup target is hidden, no action taken');
               return false;
             }
@@ -1398,4 +1407,4 @@ _module.exports.settings = {
 };
 
 
-})( require("jquery"), window , document );
+})( require("jquery"), window, document );
