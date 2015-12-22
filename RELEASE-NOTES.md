@@ -1,3 +1,9 @@
+### Version 2.1.7 - Dec 19, 2015
+
+- **Popup** - Adds `onUnplaceable` callback when element cannot be placed in visible screen [#3388](https://github.com/Semantic-Org/Semantic-UI/issues/3388)
+- **Popup** - Fixed `is visible`, `is animating`, and `is fluid` to always return `true/false` and not the DOM element. [#2781](https://github.com/Semantic-Org/Semantic-UI/issues/2781)
+- **Popup** - Fixed issue with `onEnable` callback being defined with name `onEnabled` and `onDisable` with `onDisabled` in default settings, causing an error. To preserve backwards compatibility, the mispelled callback name has been left, but the bug has been fixed. [#3148](https://github.com/Semantic-Org/Semantic-UI/issues/3148)
+
 ### Version 2.1.5 - Nov 1, 2015
 
 - **Popup** Added three new variables for `arrow` background color based on position, top, center or bottom. This makes it easier to use gradient backgrounds with popups and still match arrow colors.
