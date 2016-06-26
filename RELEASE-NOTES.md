@@ -1,8 +1,17 @@
+### Version 2.2.0 - June 26, 2016
+
+- **All UI** - Added new setting `silent` to all modules which allows you to disable all console output including errors. This can be useful for preventing known errors, like a popup which cannot place itself on screen, or `sticky` content which initializes before it is visible [#3713](https://github.com/Semantic-Org/Semantic-UI/issues/3713)
+- **Popup** - Added new `tooltip` popup type that works without javascript. Tooltips can specify positioning and some variations using `data` attributes, and will handle positioning automatically with CSS only.
+- **Popup** - Added new setting `boundary` and `scrollContext`. `boundary` lets you specify an element that the popup will try to position itself to be contained inside of. `scrollContext` lets you specify the element which when scrolled should hide the popup
+- **Popup** - Added new settings `observeChanges`, which is enabled by default. This will add special mutation observers to trigger `destroy` when the element is removed from the document, preventing memory leaks.
+- **Popup** - Fixed issue where clicking element inside popup removed from DOM (like clicking a multi select label) would cause popup to close [#3887](https://github.com/Semantic-Org/Semantic-UI/issues/3887)
+- **Popup** - checking `instanceof SVGGraphicsElement` caused error in IE11 [#3043](https://github.com/Semantic-Org/Semantic-UI/issues/3043)
+
 ### Version 2.1.7 - Dec 19, 2015
 
 - **Popup** - Adds `onUnplaceable` callback when element cannot be placed in visible screen [#3388](https://github.com/Semantic-Org/Semantic-UI/issues/3388)
 - **Popup** - Fixed `is visible`, `is animating`, and `is fluid` to always return `true/false` and not the DOM element. [#2781](https://github.com/Semantic-Org/Semantic-UI/issues/2781)
-- **Popup** - Fixed issue with `onEnable` callback being defined with name `onEnabled` and `onDisable` with `onDisabled` in default settings, causing an error. To preserve backwards compatibility, the mispelled callback name has been left, but the bug has been fixed. [#3148](https://github.com/Semantic-Org/Semantic-UI/issues/3148)
+- **Popup** - Fixed issue with `onEnable` callback being defined with name `onEnabled` and `onDisable` with `onDisabled` in default settings, causing an error. To preserve backwards compatibility, the misspelled callback name has been left, but the bug has been fixed. [#3148](https://github.com/Semantic-Org/Semantic-UI/issues/3148)
 
 ### Version 2.1.5 - Nov 1, 2015
 
@@ -164,7 +173,7 @@
 
 ### Version 0.3.6 - Oct 7, 2013
 
-- Fixes popup position sometimes appearing off-stage on second apperance
+- Fixes popup position sometimes appearing off-stage on second appearance
 - Fixes popup positions top left, top right, bottom left, bottom right being flipped
 
 ### Version 0.3.3 - Oct 2, 2013
