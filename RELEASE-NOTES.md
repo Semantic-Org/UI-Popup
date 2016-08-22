@@ -1,3 +1,9 @@
+### Version 2.2.3 - August 21, 2016
+
+- **Popup/Menu** - Fixed issue where popup would not appear correctly when nested in menu in some ways.
+- **Popup** - Fixed issue where `observeChanges: false` setting in popup would not prevent mutation observers
+- **Popup** - Fixed popup in menu example
+
 ### Version 2.2.0 - June 26, 2016
 
 - **All UI** - Added new setting `silent` to all modules which allows you to disable all console output including errors. This can be useful for preventing known errors, like a popup which cannot place itself on screen, or `sticky` content which initializes before it is visible [#3713](https://github.com/Semantic-Org/Semantic-UI/issues/3713)
