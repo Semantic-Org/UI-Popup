@@ -1,5 +1,5 @@
 /*!
- * # Semantic UI 2.2.12 - Popup
+ * # Semantic UI 2.2.14 - Popup
  * http://github.com/semantic-org/semantic-ui/
  *
  *
@@ -626,11 +626,11 @@ module.exports = function(parameters) {
             }
             return distanceFromBoundary;
           },
-          offsetParent: function($target) {
+          offsetParent: function($element) {
             var
-              element = ($target !== undefined)
-                ? $target[0]
-                : $module[0],
+              element = ($element !== undefined)
+                ? $element[0]
+                : $target[0],
               parentNode = element.parentNode,
               $node    = $(parentNode)
             ;
