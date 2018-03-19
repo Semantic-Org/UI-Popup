@@ -1,4 +1,4 @@
-### Version 2.3.0 - Feb 19, 2018
+### Version 2.3.0 - Feb 20, 2018
 
 - **Popup** - Popup can now position elements correctly even when they have a different offset context than their activating element. Like in [this example](https://jsfiddle.net/g853mc03/).
 - **Popup** - Popup will now align the center of the arrow (not the edge of the popup) when it would be reasonable (up to 2x arrow's offset from edge). [See this explanation](http://oi66.tinypic.com/2zr2ckk.jpg)
